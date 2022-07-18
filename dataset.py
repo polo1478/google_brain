@@ -66,7 +66,7 @@ def make_df(mode='train'):
             # 滑动lag行后，breathid仍然相同的行
             df[f'breath_id_lag{lag}same']=np.select([df[f'breath_id_lag{lag}']==df['breath_id']], [1], 0)
 
-            # 吸气或呼气阀门打开值 的滑动相关值，具体需要体会代码，比较难用文字描述
+            # 吸气或呼气阀门打开值 的滑动相关值
             df[f'u_in_lag_{lag}'] = df['u_in'].shift(lag).fillna(0) * df[f'breath_id_lag{lag}same']
             df[f'u_in_time{lag}'] = df['u_in'] - df[f'u_in_lag_{lag}']
             df[f'u_out_lag_{lag}'] = df['u_out'].shift(lag).fillna(0) * df[f'breath_id_lag{lag}same']
